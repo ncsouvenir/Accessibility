@@ -64,8 +64,9 @@ extension CategoryVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: grab the products for that specific category
-        let pdpVC = PDPVC()
+        let product = productCategories[indexPath.row]
+        
+        let pdpVC = PDPVC(product: product)
         navigationController?.pushViewController(pdpVC, animated: true)
     }
 }
