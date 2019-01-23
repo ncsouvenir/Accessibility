@@ -1,0 +1,16 @@
+PODS:
+  - URBNSwiftyConvenience (1.5.0)
+
+DEPENDENCIES:
+  - URBNSwiftyConvenience
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - URBNSwiftyConvenience
+
+SPEC CHECKSUMS:
+  URBNSwiftyConvenience: 6f35fa8fa3bd52d2efeedc67ff056320eac171e8
+
+PODFILE CHECKSUM: 0cbaa7bb9bb5053ac7f670f5e6e2b65cea22669a
+
+COCOAPODS: 1.5.3
