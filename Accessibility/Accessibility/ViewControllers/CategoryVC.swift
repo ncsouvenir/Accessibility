@@ -28,3 +28,10 @@ class CategoryVC: UIViewController {
     */
 
 }
+
+//TODO: CollectionViewCell
+//TODO: Set up Flow Layout Delegte
+//TODO: Set up flo properties
+//TODO: Set up cv delegates / datasource
+//TODO: Set methods associated with delegate / datasource
+//TODO: Rgister Cell
