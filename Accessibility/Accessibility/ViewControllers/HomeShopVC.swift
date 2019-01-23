@@ -7,24 +7,45 @@
 //
 
 import UIKit
+import URBNSwiftyConvenience
 
-class HomeShopVC: UIViewController {
-
+class HomeShopVC: UITableViewController {
+    var categories: [String] = ["Mens", "Womens", "Home", "Sale"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        navigationItem.title = "Shop"
+        tableView.register(HomeShopTableViewCell.self, forCellReuseIdentifier: "categoryCell")
+        //whiteOut()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func whiteOut() {
+        tableView.separatorStyle = .none
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     }
-    */
+}
 
+extension HomeShopVC {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as? HomeShopTableViewCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        
+        let category = categories[indexPath.row]
+        
+        cell.configureCell(with: category)
+        
+        return cell
+    }
+}
+
+extension HomeShopVC {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO: set the cell so you have access to it
+        
+        //TODO: Instantiate cell with Product info for that category and present categoryVC
+    }
 }
