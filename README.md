@@ -1,2 +1,2 @@
 # Accessibility
-Shop through the experience of others.
+Shop through the eyes of others.
