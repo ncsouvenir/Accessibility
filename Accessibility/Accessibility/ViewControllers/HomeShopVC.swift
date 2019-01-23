@@ -10,7 +10,7 @@ import UIKit
 import URBNSwiftyConvenience
 
 class HomeShopVC: UITableViewController {
-    var categories: [String] = ["Mens", "Womens", "Home", "Sale"]
+    private var categories: [String] = ["Mens", "Womens", "Home", "Sale"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,10 @@ extension HomeShopVC {
 extension HomeShopVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO: set the cell so you have access to it
+        let category = categories[indexPath.row]
         
         //TODO: Instantiate cell with Product info for that category and present categoryVC
-    }
+        let viewController = CategoryVC()
+        navigationController?.pushViewController(viewController, animated: true)
+}
 }
