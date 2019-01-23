@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+struct Product {
+    let image: UIImage
+    let title: String
+    let price: Double
+    let colors: [String] // "blue", "multi", "white", "lime", "orange"
+    let sizes: [String] // xxSm, xSm, s, m, l, xl
+}
+
+
