@@ -18,16 +18,11 @@ class CategoryTableViewCell: UITableViewCell {
      //TODO - replace constants with margins
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        priceLabel.backgroundColor = .yellow
-        fakeImageView.backgroundColor = .brown
-        
-        titleLabel.backgroundColor = .red
+
         titleLabel.textAlignment = .left
         titleLabel.font = titleLabel.font.withSize(20)
-
-        //TODO - IMAGEVIEW NOT SHOWING
-       
+        fakeImageView.backgroundColor = .orange
+        
         let stackview = UIStackView()
         stackview.axis = .vertical
         stackview.alignment = .center
@@ -48,6 +43,6 @@ class CategoryTableViewCell: UITableViewCell {
     func configureCell(with product: Product) {
         fakeImageView.image = product.image
         titleLabel.text = product.title
-        priceLabel.text = "\(product.price)"
+        priceLabel.text = "$ \(product.price)"
     }
 }
