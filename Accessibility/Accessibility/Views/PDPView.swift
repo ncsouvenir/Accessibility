@@ -25,7 +25,7 @@ class PDPView: UIView, Accessible {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 30.0
+        stackView.spacing = 5.0
         stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel)
         
         pdpFakeImageView.heightAnchor.constraint(equalToConstant: 450).isActive = true
@@ -53,12 +53,6 @@ class PDPView: UIView, Accessible {
         pdpPriceLabel.isAccessibilityElement = false
         pdpTitleLabel.isAccessibilityElement = false
     }
-    
-    func PDPViewWhiteOut() {
-        pdpFakeImageView.isHidden = true
-        pdpTitleLabel.isHidden = true
-        pdpPriceLabel.isHidden = true
-    }
 }
 
 class ButtonView: UIView, Accessible {
@@ -72,8 +66,7 @@ class ButtonView: UIView, Accessible {
         
         addToCartButton.setTitle("Add To Cart", for: .normal)
         addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
-        //MARK: - don't forget to set color back to white!
-        addToCartButton.setTitleColor(UIColor.white, for: .normal)
+        addToCartButton.setTitleColor(UIColor.black, for: .normal)
         
         embed(subview: addToCartButton)
     }

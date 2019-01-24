@@ -38,15 +38,13 @@ class PDPVC: UIViewController {
         pdpView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         pdpView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        buttonView.topAnchor.constraint(equalTo: pdpView.bottomAnchor, constant: 100).isActive = true
+        buttonView.topAnchor.constraint(equalTo: pdpView.bottomAnchor, constant: 50).isActive = true
         buttonView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         buttonView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         buttonView.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor).isActive = true
 
         pdpView.configureView(with: product)
         buttonView.addToCartButton.addTarget(self, action: #selector(buttonDoubleTapped), for: .touchUpInside)
-        self.navigationController?.navigationBar.tintColor = .white
-        pdpView.PDPViewWhiteOut()
     }
     
     @objc private func buttonDoubleTapped() {
@@ -55,7 +53,7 @@ class PDPVC: UIViewController {
     
     func setUpAlert() {
         
-        let successAlert = UIAlertController(title: "Success, product added to cart", message: "", preferredStyle: .alert)
+        let successAlert = UIAlertController(title: "Success, product added to cart,, select ok or cancel below", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) {
             UIAlertAction in
             self.dismiss(animated: true, completion: nil)

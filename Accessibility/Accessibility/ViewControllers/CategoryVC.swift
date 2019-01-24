@@ -9,8 +9,10 @@
 import UIKit
 import URBNSwiftyConvenience
 
+
 final class CategoryVC: UITableViewController {
     var productCategories: [Product] = []
+    var homeCategories = ["Mens", "Womens", "Home", "Sale"]
     
     var categoryCell = CategoryTableViewCell()
     
@@ -29,18 +31,13 @@ final class CategoryVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        navigationItem.title = "Categories"
+        
+        //TODO: - Pass in the catagroy title instead of just catalog
+        navigationItem.title = "Catalog"
+        
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "categoryCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        categoryVCWhiteOut()
-    }
-    
-    func categoryVCWhiteOut() {
-        tableView.separatorStyle = .none
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-        self.navigationController?.navigationBar.tintColor = .white
     }
 }
 
