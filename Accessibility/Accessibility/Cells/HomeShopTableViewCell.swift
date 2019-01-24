@@ -30,9 +30,10 @@ class HomeShopTableViewCell: UITableViewCell, Accessible {
         setAccessibility(label: nameLabel.text ?? "",
                          value: "category",
                          hint: "Double tap for \(nameLabel.text ?? "") catalog")
+        homeShopCellWhiteOut()
     }
     
-    func whiteOut() {
+    func homeShopCellWhiteOut() {
         nameLabel.isHidden = true
     }
 }

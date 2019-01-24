@@ -34,13 +34,13 @@ final class CategoryVC: UITableViewController {
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "categoryCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        //whiteOut()
-        //categoryCell.whiteOut()
+        categoryVCWhiteOut()
     }
     
-    func whiteOut() {
+    func categoryVCWhiteOut() {
         tableView.separatorStyle = .none
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.tintColor = .white
     }
 }
 

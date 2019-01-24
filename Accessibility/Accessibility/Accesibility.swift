@@ -8,6 +8,7 @@
 
 import UIKit
 
+//TODO: - Go back through app and fully implement where necessary
 protocol Accessible {
     func setAccessibility(label: String, value: String?, hint: String?)
 }

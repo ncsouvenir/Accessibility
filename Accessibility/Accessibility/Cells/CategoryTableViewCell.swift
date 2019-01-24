@@ -16,7 +16,7 @@ class CategoryTableViewCell: UITableViewCell {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     
-     //TODO - replace constants with margins
+    //TODO: - Replace constants with margins struct
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -35,7 +35,6 @@ class CategoryTableViewCell: UITableViewCell {
         
         fakeImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         fakeImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        
         contentView.embed(subview: stackview, insets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
     }
     
@@ -48,6 +47,7 @@ class CategoryTableViewCell: UITableViewCell {
         titleLabel.text = product.title
         priceLabel.text = "\(product.price)"
         applyAccessibility()
+        categoryCellWhiteOut()
     }
 
     final func applyAccessibility() {
@@ -59,10 +59,9 @@ class CategoryTableViewCell: UITableViewCell {
         titleLabel.isAccessibilityElement = false
     }
     
-    func whiteOut() {
-        //TODO: change backgroundColor to white instead?
-        fakeImageView.isHidden = true
-        priceLabel.isHidden = true
-        titleLabel.isHidden = true
+    func categoryCellWhiteOut() {
+        fakeImageView.backgroundColor = .white
+        priceLabel.textColor = .white
+        titleLabel.textColor = .white
     }
 }

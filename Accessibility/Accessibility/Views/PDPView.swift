@@ -14,44 +14,24 @@ class PDPView: UIView, Accessible {
     let pdpFakeImageView = UIImageView()
     let pdpTitleLabel = UILabel()
     let pdpPriceLabel = UILabel()
-    let addToCartButton = UIButton()
     
     init() {
         super.init(frame: .zero)
-        backgroundColor = .yellow
+        
         isAccessibilityElement = false
         self.shouldGroupAccessibilityChildren = true
-        pdpFakeImageView.backgroundColor = .purple
-        
-        addToCartButton.backgroundColor = .red
-        addToCartButton.setTitle("Add To Cart", for: .normal)
-        addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
-        addToCartButton.setTitleColor(UIColor.black, for: .normal)
-        addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 8.0
-        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel, UIView())
+        stackView.spacing = 30.0
+        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel)
         
         pdpFakeImageView.heightAnchor.constraint(equalToConstant: 450).isActive = true
         pdpFakeImageView.widthAnchor.constraint(equalToConstant: 350).isActive = true
-
-        //TODO: - make button stretch out across entire screen width
-        addSubviewsWithNoConstraints(stackView)
         
-        stackView.topAnchor.constraint(equalTo: self.safeAreaTopAnchor, constant: 30).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        
-        addSubviewsWithNoConstraints(addToCartButton)
-        
-        addToCartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        addToCartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        addToCartButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
-        addToCartButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60).isActive = true
+        embed(subview: stackView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,26 +48,37 @@ class PDPView: UIView, Accessible {
     final func applyAccessibility() {
         isAccessibilityElement = true
         accessibilityLabel = "\(pdpTitleLabel.text ?? ""), \(pdpPriceLabel.text ?? "")"
-        accessibilityHint = "Product Detail Page"
+        accessibilityHint = "Add to cart below"
         pdpFakeImageView.isAccessibilityElement = false
         pdpPriceLabel.isAccessibilityElement = false
         pdpTitleLabel.isAccessibilityElement = false
     }
     
-    func whiteOut() {
+    func PDPViewWhiteOut() {
         pdpFakeImageView.isHidden = true
         pdpTitleLabel.isHidden = true
         pdpPriceLabel.isHidden = true
-        addToCartButton.titleLabel?.isHidden = true
-    }
-    
-    //TODO: - 1. tap gesture recognizer on button
-    //TODO: - 2. wrap button in view and add tap gesture recognizer?
-    @objc private func buttonTapped(){
-        print("kgjlgjfd")
-        isAccessibilityElement = true
-        initCustomAccessibility(with: .button)
-        setAccessibility(label: "\(addToCartButton)", value: "Add To Cart", hint: "Double tap to add")
     }
 }
 
+class ButtonView: UIView, Accessible {
+     let addToCartButton = UIButton()
+    
+    init() {
+        super.init(frame: .zero)
+        
+        initCustomAccessibility(with: .button)
+        setAccessibility(label: "Add To Cart", value: nil, hint: "Double Tap to add product")
+        
+        addToCartButton.setTitle("Add To Cart", for: .normal)
+        addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
+        //MARK: - don't forget to set color back to white!
+        addToCartButton.setTitleColor(UIColor.white, for: .normal)
+        
+        embed(subview: addToCartButton)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
