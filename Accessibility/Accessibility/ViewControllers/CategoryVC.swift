@@ -37,6 +37,8 @@ final class CategoryVC: UITableViewController {
         navigationItem.title = "Categories"
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "categoryCell")
         //whiteOut()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
     }
     
     func whiteOut() {
@@ -62,13 +64,10 @@ extension CategoryVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: grab the products for that specific category
-        let pdpVC = PDPVC()
+        let product = productCategories[indexPath.row]
+        
+        let pdpVC = PDPVC(product: product)
         navigationController?.pushViewController(pdpVC, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
     }
 }
 

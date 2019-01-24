@@ -19,6 +19,10 @@ struct Product {
     static let mensProducts = [Product(image: nil, title: "UO Colorblock Wind Pant", price: 64.00, colors: nil, sizes: nil),
                                Product(image: nil, title: "Fila Disruptor Sneaker", price: 80.00, colors: nil, sizes: nil),
                                Product(image: nil, title: "GT Bicycles Tee", price: 34.00, colors: nil, sizes: nil),
+                               Product(image: nil, title: "Adidas Kaval Graphic Hoodie Sweatshirt", price: 100.00, colors: nil, sizes: nil),
+                               Product(image: nil, title: "UO Colorblock Wind Pant", price: 64.00, colors: nil, sizes: nil),
+                               Product(image: nil, title: "Fila Disruptor Sneaker", price: 80.00, colors: nil, sizes: nil),
+                               Product(image: nil, title: "GT Bicycles Tee", price: 34.00, colors: nil, sizes: nil),
                                Product(image: nil, title: "Adidas Kaval Graphic Hoodie Sweatshirt", price: 100.00, colors: nil, sizes: nil)]
     
     //TODO: re-populate with correct data
