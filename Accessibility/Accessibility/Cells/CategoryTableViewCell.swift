@@ -11,6 +11,7 @@ import URBNSwiftyConvenience
 
 
 class CategoryTableViewCell: UITableViewCell {
+
     private let fakeImageView = UIImageView()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()

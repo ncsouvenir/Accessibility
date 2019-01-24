@@ -51,7 +51,6 @@ class PDPView: UIView {
 
     @objc private func buttonTapped(){
         //TODO: - Voice Over, "item Added to cart"
-        print("button tapped")
     }
 }
 
