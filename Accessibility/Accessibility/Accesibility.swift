@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol Accessible {
     func setAccessibility(label: String, value: String?, hint: String?)
