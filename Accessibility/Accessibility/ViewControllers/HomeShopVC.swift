@@ -11,12 +11,14 @@ import URBNSwiftyConvenience
 
 class HomeShopVC: UITableViewController {
     var homeCategories: [String] = ["Mens", "Womens", "Home", "Sale"]
+    let homeCell = HomeShopTableViewCell()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Shop"
         tableView.register(HomeShopTableViewCell.self, forCellReuseIdentifier: "categoryCell")
         //whiteOut()
+        //homeCell.whiteOut()
     }
     
     func whiteOut() {

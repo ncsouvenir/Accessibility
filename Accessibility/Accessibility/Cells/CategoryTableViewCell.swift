@@ -19,7 +19,9 @@ class CategoryTableViewCell: UITableViewCell {
      //TODO - replace constants with margins
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
+        isAccessibilityElement = false
+        shouldGroupAccessibilityChildren = true
         titleLabel.textAlignment = .left
         titleLabel.font = titleLabel.font.withSize(20)
         fakeImageView.backgroundColor = .orange
@@ -44,6 +46,23 @@ class CategoryTableViewCell: UITableViewCell {
     func configureCell(with product: Product) {
         fakeImageView.image = product.image
         titleLabel.text = product.title
-        priceLabel.text = "$ \(product.price)"
+        priceLabel.text = "\(product.price)"
+        applyAccessibility()
+    }
+
+    final func applyAccessibility() {
+        isAccessibilityElement = true
+        accessibilityLabel = "\(titleLabel.text ?? ""), \(priceLabel.text ?? "") dollars"
+        accessibilityHint = "Double tap for more"
+        fakeImageView.isAccessibilityElement = false
+        priceLabel.isAccessibilityElement = false
+        titleLabel.isAccessibilityElement = false
+    }
+    
+    func whiteOut() {
+        //TODO: change backgroundColor to white instead?
+        fakeImageView.isHidden = true
+        priceLabel.isHidden = true
+        titleLabel.isHidden = true
     }
 }

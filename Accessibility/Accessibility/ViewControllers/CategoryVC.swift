@@ -10,13 +10,9 @@ import UIKit
 import URBNSwiftyConvenience
 
 final class CategoryVC: UITableViewController {
-    var productCategories: [Product] = []{
-        didSet{
-            tableView.reloadData()
-        }
-    }
+    var productCategories: [Product] = []
     
-    var homeVC = HomeShopVC()
+    var categoryCell = CategoryTableViewCell()
     
     override init(style: UITableView.Style) {
         super.init(style: style)
@@ -24,7 +20,6 @@ final class CategoryVC: UITableViewController {
     
     init(productCategories: [Product]) {
         super.init(style: UITableView.Style.plain)
-        
         self.productCategories = productCategories
     }
     
@@ -34,11 +29,13 @@ final class CategoryVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         navigationItem.title = "Categories"
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "categoryCell")
-        //whiteOut()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
+        //whiteOut()
+        //categoryCell.whiteOut()
     }
     
     func whiteOut() {

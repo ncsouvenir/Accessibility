@@ -27,10 +27,12 @@ class HomeShopTableViewCell: UITableViewCell, Accessible {
 
     func configureCell(with name: String) {
         nameLabel.text = name
-        //TODO: hide labels to set font color to white for demo
-        //nameLabel.textColor = .white
         setAccessibility(label: nameLabel.text ?? "",
                          value: "category",
-                         hint: "Send you to \(nameLabel.text ?? "") catalog")
+                         hint: "Double tap for \(nameLabel.text ?? "") catalog")
+    }
+    
+    func whiteOut() {
+        nameLabel.isHidden = true
     }
 }

@@ -11,18 +11,21 @@ import URBNSwiftyConvenience
 
 class PDPVC: UIViewController {
     
+    
     var product: Product
     var pdpView = PDPView()
     
     init(product: Product) {
         self.product = product
-        
+       
         super.init(nibName: nil, bundle: nil)
         
+         view.backgroundColor = .blue
+        
         navigationItem.title = product.title
-        pdpView.pdpFakeImageView.image = product.image
-        pdpView.pdpTitleLabel.text = product.title
-        pdpView.pdpPriceLabel.text = "$ \(product.price)"
+//        pdpView.pdpFakeImageView.image = product.image
+//        pdpView.pdpTitleLabel.text = product.title
+//        pdpView.pdpPriceLabel.text = "$ \(product.price)"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,8 +34,11 @@ class PDPVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
         view.embed(subview: pdpView)
+
+        pdpView.configureView(with: product)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //pdpView.whiteOut()
     }
 }

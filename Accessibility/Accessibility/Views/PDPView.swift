@@ -9,7 +9,7 @@
 import UIKit
 import URBNSwiftyConvenience
 
-class PDPView: UIView {
+class PDPView: UIView, Accessible {
     
     let pdpFakeImageView = UIImageView()
     let pdpTitleLabel = UILabel()
@@ -18,9 +18,12 @@ class PDPView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
+        backgroundColor = .yellow
+        isAccessibilityElement = false
+        self.shouldGroupAccessibilityChildren = true
         pdpFakeImageView.backgroundColor = .purple
         
+        addToCartButton.backgroundColor = .red
         addToCartButton.setTitle("Add To Cart", for: .normal)
         addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
         addToCartButton.setTitleColor(UIColor.black, for: .normal)
@@ -31,7 +34,7 @@ class PDPView: UIView {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.spacing = 8.0
-        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel, UIView(), addToCartButton)
+        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel, UIView())
         
         pdpFakeImageView.heightAnchor.constraint(equalToConstant: 450).isActive = true
         pdpFakeImageView.widthAnchor.constraint(equalToConstant: 350).isActive = true
@@ -40,17 +43,51 @@ class PDPView: UIView {
         addSubviewsWithNoConstraints(stackView)
         
         stackView.topAnchor.constraint(equalTo: self.safeAreaTopAnchor, constant: 30).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
+        addSubviewsWithNoConstraints(addToCartButton)
+        
+        addToCartButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        addToCartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        addToCartButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
+        addToCartButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    func configureView(with product: Product) {
+        pdpFakeImageView.image = product.image
+        pdpTitleLabel.text = product.title
+        pdpPriceLabel.text = "$ \(product.price)"
+        applyAccessibility()
+    }
+    
+    final func applyAccessibility() {
+        isAccessibilityElement = true
+        accessibilityLabel = "\(pdpTitleLabel.text ?? ""), \(pdpPriceLabel.text ?? "")"
+        accessibilityHint = "Product Detail Page"
+        pdpFakeImageView.isAccessibilityElement = false
+        pdpPriceLabel.isAccessibilityElement = false
+        pdpTitleLabel.isAccessibilityElement = false
+    }
+    
+    func whiteOut() {
+        pdpFakeImageView.isHidden = true
+        pdpTitleLabel.isHidden = true
+        pdpPriceLabel.isHidden = true
+        addToCartButton.titleLabel?.isHidden = true
+    }
+    
+    //TODO: - 1. tap gesture recognizer on button
+    //TODO: - 2. wrap button in view and add tap gesture recognizer?
     @objc private func buttonTapped(){
-        //TODO: - Voice Over, "item Added to cart"
+        print("kgjlgjfd")
+        isAccessibilityElement = true
+        initCustomAccessibility(with: .button)
+        setAccessibility(label: "\(addToCartButton)", value: "Add To Cart", hint: "Double tap to add")
     }
 }
 
