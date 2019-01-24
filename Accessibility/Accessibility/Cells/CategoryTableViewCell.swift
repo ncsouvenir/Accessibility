@@ -47,7 +47,6 @@ class CategoryTableViewCell: UITableViewCell {
         titleLabel.text = product.title
         priceLabel.text = "\(product.price)"
         applyAccessibility()
-        categoryCellWhiteOut()
     }
 
     final func applyAccessibility() {
@@ -57,11 +56,5 @@ class CategoryTableViewCell: UITableViewCell {
         fakeImageView.isAccessibilityElement = false
         priceLabel.isAccessibilityElement = false
         titleLabel.isAccessibilityElement = false
-    }
-    
-    func categoryCellWhiteOut() {
-        fakeImageView.backgroundColor = .white
-        priceLabel.textColor = .white
-        titleLabel.textColor = .white
     }
 }

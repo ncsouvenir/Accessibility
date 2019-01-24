@@ -18,12 +18,6 @@ class HomeShopVC: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "Shop"
         tableView.register(HomeShopTableViewCell.self, forCellReuseIdentifier: "categoryCell")
-        homeShopVCWhiteOut()
-    }
-    
-    func homeShopVCWhiteOut() {
-        tableView.separatorStyle = .none
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     }
 }
 
