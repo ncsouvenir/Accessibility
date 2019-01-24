@@ -9,7 +9,8 @@
 import UIKit
 import URBNSwiftyConvenience
 
-class HomeShopTableViewCell: UITableViewCell {
+class HomeShopTableViewCell: UITableViewCell, Accessible {
+
     private let nameLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,7 +27,13 @@ class HomeShopTableViewCell: UITableViewCell {
 
     func configureCell(with name: String) {
         nameLabel.text = name
-        //TODO: hide labels to set font color to white for demo
-        //nameLabel.textColor = .white
+        setAccessibility(label: nameLabel.text ?? "",
+                         value: "category",
+                         hint: "Double tap for \(nameLabel.text ?? "") catalog")
+        homeShopCellWhiteOut()
+    }
+    
+    func homeShopCellWhiteOut() {
+        nameLabel.isHidden = true
     }
 }

@@ -9,49 +9,76 @@
 import UIKit
 import URBNSwiftyConvenience
 
-class PDPView: UIView {
+class PDPView: UIView, Accessible {
     
     let pdpFakeImageView = UIImageView()
     let pdpTitleLabel = UILabel()
     let pdpPriceLabel = UILabel()
-    let addToCartButton = UIButton()
     
     init() {
         super.init(frame: .zero)
         
-        pdpFakeImageView.backgroundColor = .purple
-        
-        addToCartButton.setTitle("Add To Cart", for: .normal)
-        addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
-        addToCartButton.setTitleColor(UIColor.black, for: .normal)
-        addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        isAccessibilityElement = false
+        self.shouldGroupAccessibilityChildren = true
 
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 8.0
-        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel, UIView(), addToCartButton)
+        stackView.spacing = 30.0
+        stackView.addArrangedSubviews(pdpFakeImageView, pdpTitleLabel, pdpPriceLabel)
         
         pdpFakeImageView.heightAnchor.constraint(equalToConstant: 450).isActive = true
         pdpFakeImageView.widthAnchor.constraint(equalToConstant: 350).isActive = true
-
-        //TODO: - make button stretch out across entire screen width
-        addSubviewsWithNoConstraints(stackView)
         
-        stackView.topAnchor.constraint(equalTo: self.safeAreaTopAnchor, constant: 30).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        embed(subview: stackView)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    @objc private func buttonTapped(){
-        //TODO: - Voice Over, "item Added to cart"
-        print("button tapped")
+    
+    func configureView(with product: Product) {
+        pdpFakeImageView.image = product.image
+        pdpTitleLabel.text = product.title
+        pdpPriceLabel.text = "$ \(product.price)"
+        applyAccessibility()
+    }
+    
+    final func applyAccessibility() {
+        isAccessibilityElement = true
+        accessibilityLabel = "\(pdpTitleLabel.text ?? ""), \(pdpPriceLabel.text ?? "")"
+        accessibilityHint = "Add to cart below"
+        pdpFakeImageView.isAccessibilityElement = false
+        pdpPriceLabel.isAccessibilityElement = false
+        pdpTitleLabel.isAccessibilityElement = false
+    }
+    
+    func PDPViewWhiteOut() {
+        pdpFakeImageView.isHidden = true
+        pdpTitleLabel.isHidden = true
+        pdpPriceLabel.isHidden = true
     }
 }
 
+class ButtonView: UIView, Accessible {
+     let addToCartButton = UIButton()
+    
+    init() {
+        super.init(frame: .zero)
+        
+        initCustomAccessibility(with: .button)
+        setAccessibility(label: "Add To Cart", value: nil, hint: "Double Tap to add product")
+        
+        addToCartButton.setTitle("Add To Cart", for: .normal)
+        addToCartButton.titleLabel?.font = .systemFont(ofSize: 18)
+        //MARK: - don't forget to set color back to white!
+        addToCartButton.setTitleColor(UIColor.white, for: .normal)
+        
+        embed(subview: addToCartButton)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

@@ -10,22 +10,24 @@ import UIKit
 import URBNSwiftyConvenience
 
 class HomeShopVC: UITableViewController {
+    
     var homeCategories: [String] = ["Mens", "Womens", "Home", "Sale"]
+    let homeCell = HomeShopTableViewCell()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Shop"
         tableView.register(HomeShopTableViewCell.self, forCellReuseIdentifier: "categoryCell")
-        //whiteOut()
+        homeShopVCWhiteOut()
     }
     
-    func whiteOut() {
+    func homeShopVCWhiteOut() {
         tableView.separatorStyle = .none
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     }
 }
 
-//MARK - handling tableview Datasource and Delegate
+//MARK: - handling tableview Datasource and Delegate
 extension HomeShopVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeCategories.count
@@ -42,23 +44,18 @@ extension HomeShopVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: grab the products for that specific category
         if (tableView.cellForRow(at: indexPath) as? HomeShopTableViewCell) != nil {
             
             var array: [Product] = []
-            
             switch indexPath.row {
             case 0:
                 array = Product.mensProducts
             case 1:
                 array = Product.womensProducts
-                break
             case 2:
                 array = Product.homeProducts
-                break
             case 3:
                 array = Product.saleProducts
-                break
             default:
                 break
             }
